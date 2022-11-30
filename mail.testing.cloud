@@ -1,0 +1,29 @@
+#Firts thing that you need to set up it's your computer hostname with using code script on computer command line interfaces like "hostnamectl set-hostname mail.testing.cloud"
+#Verses Second set up the computer IP Address with ip static. Open with vim "/etc/netplan/000-installer-config.yaml" then insert script
+# as in below:
+network:
+  ethernets:
+    ens160:
+      dhcp4: false
+      addresses:
+      - 10.23.2.200/22
+      gateway4: 10.23.0.1
+      nameserver:
+        addresses: [10.23.1.252,8.8.8.8]
+  version: 2
+  
+#Verse three save and restart network seting with command "netplan apply"
+#At the next step continue with open file hosts in command line interface
+#vim /etc/hosts then insert script below:
+10.23.2.200 mail.testing.cloud mail
+#IP Address of 10.23.2.200 that is Ip of computer mail server
+#Step of fourth set up domain and ip dns on resolve.conf
+search testing.cloud
+nameserver 10.23.1.252
+nameserver 8.8.8.8
+
+#If steps of above has finish install download and install zimbra mail server
+#Use wget command with follow of link zimbra mail server to download file
+#User command "tar xfs file-name" to extract file
+#If processes extract have finish continuine to install zimbra with the way cd to the new directory and looking for file name "install.sh"
+#Then next "./install.sh" and then process to install package of zimbra till finish.
